@@ -1,8 +1,10 @@
 /* eslint-disable react/react-in-jsx-scope */
 import logo from './logo.svg'
 import './App.css'
+import { getTopStoryIds } from './utils/api'
 
-function App () {
+async function App () {
+  console.log(await getTopStoryIds())
   return (
     <div className="App">
       <header className="App-header">
