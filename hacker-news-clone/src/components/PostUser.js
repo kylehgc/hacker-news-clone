@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 function getFormattedTime (time) {
   return new Date(time).toLocaleString()
 }
-function NameLink ({ name }) {
+function NameLink ({ userName }) {
   return (
-    <Link to={`/user?id=${name}`}> {name}</Link>
+    <Link to={`/user?id=${userName}`}> {userName}</Link>
   )
 }
 
@@ -21,10 +21,10 @@ function Comments ({ numComments, id }) {
   )
 }
 
-export default function PostUser ({ name, time, id, numComments }) {
+export default function PostUser ({ userName, time, id, numComments }) {
   return (
     <h2>
-      by: <NameLink name = {name}/> on {getFormattedTime(time)}
+      by: <NameLink userName = {userName}/> on {getFormattedTime(time)}
       {' '}<Comments numComments={numComments} id={id}/>
 
     </h2>
@@ -32,7 +32,7 @@ export default function PostUser ({ name, time, id, numComments }) {
 }
 
 NameLink.propTypes = {
-  name: PropTypes.string.isRequired
+  userName: PropTypes.string.isRequired
 }
 Comments.propTypes = {
   numComments: PropTypes.number,
@@ -40,7 +40,7 @@ Comments.propTypes = {
 }
 
 PostUser.propTypes = {
-  name: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired,
   numComments: PropTypes.number,
   id: PropTypes.number.isRequired
