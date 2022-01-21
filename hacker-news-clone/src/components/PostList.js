@@ -12,7 +12,7 @@ export default class Posts extends React.Component {
   async componentDidMount () {
     if (this.state.mode === 'top') {
       this.setState = {
-        items: await getTopStories
+        items: await getTopStories()
       }
     }
   }
