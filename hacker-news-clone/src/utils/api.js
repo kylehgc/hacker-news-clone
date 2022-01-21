@@ -29,11 +29,10 @@ async function getItemById (BASEURL, id) {
 // }
 
 async function getItemList (BASEURL, ids) {
-  const shortItemList = ids.slice(-10, -1)
+  const shortItemList = ids.slice(-40, -1)
   const items = Promise.all(
     shortItemList.map(async (id) => getItemById(BASEURL, id))
   )
-
   return items
 }
 

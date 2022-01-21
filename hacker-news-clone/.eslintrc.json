@@ -2,6 +2,7 @@
     "env": {
         "browser": true,
         "es2021": true,
+        "node": true,
         "jest/globals": true
     },
     "extends": [
@@ -15,10 +16,14 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
+    // "parser": "@babel/eslint-parser",
     "plugins": [
         "react",
-        "jest"
+        "jest",
+        "jsx"
     ],
     "rules": {
+        "indent":[2,2],
+        "react/react-in-jsx-scope": "off"
     }
 }
