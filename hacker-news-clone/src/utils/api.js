@@ -21,12 +21,24 @@ async function getItemById (BASEURL, id) {
   return item
 }
 
-// async function getUserById (BASEURL, id) {
-//   const queryURL = `${BASEURL}user/${id}.json`
-//   const response = await fetch(queryURL)
-//   const user = response.json
-//   return user
-// }
+async function getUserById (BASEURL, id) {
+  const queryURL = `${BASEURL}user/${id}.json`
+  const response = await fetch(queryURL)
+  const user = await response.json()
+  return user
+}
+
+async function getSubmissionsByUserProfile (user) {
+  const submissions = await getItemList(BASEURL, user.submitted)
+  const stories = submissions.filter(item => item.type === 'story')
+  return stories
+}
+
+export async function getUserProfile (userName) {
+  const user = await getUserById(BASEURL, userName)
+  const submissions = getSubmissionsByUserProfile(user)
+  return { user, submissions }
+}
 
 async function getItemList (BASEURL, ids) {
   const shortItemList = ids.slice(-40, -1)
