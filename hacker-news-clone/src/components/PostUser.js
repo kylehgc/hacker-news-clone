@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-function getFormattedTime (time) {
-  return new Date(time).toLocaleString()
+export function getFormattedTime (time) {
+  return new Date(time * 1000).toLocaleString()
 }
 function NameLink ({ userName }) {
   return (

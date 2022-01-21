@@ -1,15 +1,31 @@
 // import UserProfile from './components/UserProfile'
-import Stories from './components/Stories'
+// import Stories from './components/Stories'
+import Loading from './components/Loading'
+import React from 'react'
+import PropTypes from 'prop-types'
+// import UserProfile from './components/UserProfile'
 import './App.css'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+const Stories = React.lazy(() => import('./components/Stories'))
+const UserProfile = React.lazy(() => import('./components/UserProfile'))
+
 function App () {
   return (
     <Router>
       <div className="App">
-        <Stories mode="top"></Stories>
+        <React.Suspense fallback = {<Loading />} >
+          <Switch>
+            <Route exact path='/' render={() => <Stories mode='top'/>} />
+            <Route path='/user' component={UserProfile} />
+            <Route render={() => <h1>404</h1>}/>
+          </Switch>
+        </React.Suspense>
       </div>
     </Router>
   )
 }
-
+Route.propTypes = {
+  ...Route.propTypes,
+  component: PropTypes.object
+}
 export default App

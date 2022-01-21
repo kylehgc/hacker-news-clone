@@ -27,16 +27,18 @@ async function getUserById (BASEURL, id) {
   const user = await response.json()
   return user
 }
-
+function getStories (items) {
+  return items.filter(item => item.type === 'story')
+}
 async function getSubmissionsByUserProfile (user) {
-  const submissions = await getItemList(BASEURL, user.submitted)
-  const stories = submissions.filter(item => item.type === 'story')
+  const items = await getItemList(BASEURL, user.submitted)
+  const stories = getStories(items)
   return stories
 }
 
 export async function getUserProfile (userName) {
   const user = await getUserById(BASEURL, userName)
-  const submissions = getSubmissionsByUserProfile(user)
+  const submissions = await getSubmissionsByUserProfile(user)
   return { user, submissions }
 }
 
@@ -50,5 +52,6 @@ async function getItemList (BASEURL, ids) {
 
 export async function getTopStories () {
   const topStoryIds = await getTopStoryIds(BASEURL)
-  return await getItemList(BASEURL, topStoryIds)
+  const items = await getItemList(BASEURL, topStoryIds)
+  return getStories(items)
 }

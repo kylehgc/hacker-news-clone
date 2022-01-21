@@ -25,5 +25,5 @@ export default function PostList (props) {
 }
 
 PostList.propTypes = {
-  items: PropTypes.object.isRequired
+  items: PropTypes.array.isRequired
 }

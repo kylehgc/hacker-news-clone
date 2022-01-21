@@ -18,7 +18,6 @@ export default class Stories extends React.Component {
         items: items,
         loading: false
       })
-      console.log(items)
     }
   }
 
@@ -26,7 +25,6 @@ export default class Stories extends React.Component {
     if (this.state.loading === true) {
       return <Loading text='Loading'/>
     }
-    console.log(this.state)
     // const { id, kids, by: userName, url, time, title } = this.state.items
     return (
       <PostList items={this.state.items}/>
