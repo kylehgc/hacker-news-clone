@@ -1,25 +1,14 @@
-/* eslint-disable react/react-in-jsx-scope */
-import logo from './logo.svg'
+// import PostUser from './components/PostUser'
+import PostTitle from './components/PostTitle'
 import './App.css'
-
-async function App () {
+import { BrowserRouter as Router } from 'react-router-dom'
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <PostTitle url="https://www.google.com" title ="this is the title"/>
+      </div>
+    </Router>
   )
 }
 
