@@ -21,12 +21,26 @@ async function getItemById (BASEURL, id) {
   return item
 }
 
-// async function getUserById (BASEURL, id) {
-//   const queryURL = `${BASEURL}user/${id}.json`
-//   const response = await fetch(queryURL)
-//   const user = response.json
-//   return user
-// }
+async function getUserById (BASEURL, id) {
+  const queryURL = `${BASEURL}user/${id}.json`
+  const response = await fetch(queryURL)
+  const user = await response.json()
+  return user
+}
+function getStories (items) {
+  return items.filter(item => item.type === 'story')
+}
+async function getSubmissionsByUserProfile (user) {
+  const items = await getItemList(BASEURL, user.submitted)
+  const stories = getStories(items)
+  return stories
+}
+
+export async function getUserProfile (userName) {
+  const user = await getUserById(BASEURL, userName)
+  const submissions = await getSubmissionsByUserProfile(user)
+  return { user, submissions }
+}
 
 async function getItemList (BASEURL, ids) {
   const shortItemList = ids.slice(-40, -1)
@@ -38,5 +52,6 @@ async function getItemList (BASEURL, ids) {
 
 export async function getTopStories () {
   const topStoryIds = await getTopStoryIds(BASEURL)
-  return await getItemList(BASEURL, topStoryIds)
+  const items = await getItemList(BASEURL, topStoryIds)
+  return getStories(items)
 }

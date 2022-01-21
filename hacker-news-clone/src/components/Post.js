@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const Post = ({ id, numComments, title, url, userName, time }) => {
   return (
     <div>
-      <PostTitle title={title} url={url}/>
+      <PostTitle title={title} url={url || `post?id=${id}`}/>
       <PostUser
         userName={userName}
         time={time}
@@ -16,7 +16,7 @@ const Post = ({ id, numComments, title, url, userName, time }) => {
 }
 Post.propTypes = {
   title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
   userName: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired,
   numComments: PropTypes.number,
