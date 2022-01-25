@@ -43,5 +43,5 @@ PostUser.propTypes = {
   userName: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired,
   numComments: PropTypes.number,
-  id: PropTypes.number.isRequired
+  id: PropTypes.number
 }

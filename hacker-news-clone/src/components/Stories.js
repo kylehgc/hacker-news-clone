@@ -1,5 +1,5 @@
 import React from 'react'
-import { getTopStories } from '../utils/api'
+import { getNewStories, getTopStories } from '../utils/api'
 import PropTypes from 'prop-types'
 import Loading from './Loading'
 import PostList from './PostList'
@@ -14,6 +14,12 @@ export default class Stories extends React.Component {
   async componentDidMount () {
     if (this.state.mode === 'top') {
       const items = await getTopStories()
+      this.setState({
+        items: items,
+        loading: false
+      })
+    } else {
+      const items = await getNewStories()
       this.setState({
         items: items,
         loading: false
