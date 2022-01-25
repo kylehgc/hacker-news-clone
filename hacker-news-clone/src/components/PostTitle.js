@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types'
 
 const PostTitle = ({ title, url }) => (
-  <a href={url}>{title}</a>
+  <a className='post-title' href={url}>{title}</a>
 )
 
 export default PostTitle

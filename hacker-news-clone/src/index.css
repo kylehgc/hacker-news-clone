@@ -6,7 +6,81 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-direction: column;
+  padding: 50px;
 
+}
+.nav-link {
+  
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.nav li {
+  margin-right: 10px;
+}
+.nav-link {
+  
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+}
+.space-between {
+  justify-content: space-between;
+}
+.link-light {
+  text-decoration: none;
+  color: red;
+}
+.btn-clear {
+  border: none;
+  background: transparent;
+}
+.link-dark {
+
+}
+.post-list {
+  margin: 15px 0;
+  font-size: 15px;
+  padding-inline-start: 0;
+}
+
+ul {
+  padding: 0;
+}
+.nav {
+  display: flex
+}
+.comment {
+  margin: 10px 0;
+  background: rgba(128, 128, 128, 0.1411764705882353);
+  padding: 10px;
+}
+.comment-list {
+  font-size: 15px;
+  padding-inline-start: 0;
+}
+
+.post-title {
+  text-decoration: none;
+  color: rgb(187, 46, 31);
+  font-weight: bold;
+}
+
+li {
+  display: list-item;
+  list-style-type: none;
+  margin: 15px auto;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

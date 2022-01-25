@@ -32,7 +32,7 @@ function getFilteredStories (items) {
   return items.filter(item => item.type === 'story')
 }
 async function getSubmissionsByUserProfile (user) {
-  const items = await getItemList(BASEURL, user.submitted)
+  const items = await getItemList(BASEURL, getShortItemList(user.submitted, 25))
   const stories = getFilteredStories(items)
   return stories
 }
@@ -49,18 +49,18 @@ export async function getCommentList (id) {
     return ({ story, comments: null })
   }
 
-  const unFilteredComments = await getItemList(BASEURL, story.kids)
+  const unFilteredComments = await getItemList(BASEURL, getShortItemList(story.kids, 50))
 
   const comments = unFilteredComments.filter(item => item.text)
   console.log(comments)
   return { story, comments }
 }
 
-function getshortItemList (ids) {
-  if (ids.length <= 10) {
+function getShortItemList (ids, maxLength) {
+  if (ids.length <= maxLength) {
     return ids
   } else {
-    return ids.slice(0, 10)
+    return ids.slice(0, maxLength)
   }
 }
 async function getItemList (BASEURL, ids) {
@@ -72,7 +72,7 @@ async function getItemList (BASEURL, ids) {
 
 export async function getStories (mode) {
   const storyIds = await getStoryIds(BASEURL, mode)
-  const shortList = getshortItemList(storyIds)
+  const shortList = getShortItemList(storyIds, 25)
   const items = await getItemList(BASEURL, shortList)
   return getFilteredStories(items)
 }

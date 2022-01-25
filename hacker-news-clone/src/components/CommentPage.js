@@ -6,8 +6,6 @@ import PropTypes from 'prop-types'
 import Post from './Post'
 import Comment from './Comment'
 
-// import PostUser from './PostUser'
-
 export default class CommentPage extends React.Component {
   state = {
     loading: true,
@@ -45,9 +43,9 @@ export default class CommentPage extends React.Component {
 }
 
 const CommentList = ({ comments }) => (
-  <ul>
+  <ul className='comment-list'>
     {comments.map(({ text: commentBody, time, by: userName, id }) => (
-      <li key ={id}>
+      <li key ={id} className='comment'>
         <Comment commentBody={commentBody} time={time} userName={userName} id={id} />
       </li>
     ))}

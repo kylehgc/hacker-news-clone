@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 export default function PostList (props) {
   return (
-    <ul>
+    <ul className='post-list'>
       {props.items.map(({
         by: userName,
         id, title,

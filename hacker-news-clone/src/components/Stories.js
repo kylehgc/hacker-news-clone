@@ -19,6 +19,10 @@ export default class Stories extends React.Component {
     })
   }
 
+  // async UNSAFE_componentWillReceiveProps () {
+
+  // }
+
   render () {
     if (this.state.loading === true) {
       return <Loading text='Loading'/>
