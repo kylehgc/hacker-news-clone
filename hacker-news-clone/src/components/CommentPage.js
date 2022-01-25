@@ -5,6 +5,7 @@ import { getCommentList } from '../utils/api'
 import PropTypes from 'prop-types'
 import Post from './Post'
 import Comment from './Comment'
+
 // import PostUser from './PostUser'
 
 export default class CommentPage extends React.Component {
@@ -31,10 +32,9 @@ export default class CommentPage extends React.Component {
     const { story, comments } = this.state
     return (
       <React.Fragment>
-
         <Post id={story.id}
           title={story.title}
-          numComments={story.kids ? story.kids.length : null}
+          numComments={story.descendants ? story.descendants : null}
           url={story.url}
           userName={story.by}
           time={story.time} />
@@ -48,7 +48,7 @@ const CommentList = ({ comments }) => (
   <ul>
     {comments.map(({ text: commentBody, time, by: userName, id }) => (
       <li key ={id}>
-        <Comment commentBody={commentBody} time={time} userName={userName} />
+        <Comment commentBody={commentBody} time={time} userName={userName} id={id} />
       </li>
     ))}
   </ul>
@@ -58,5 +58,5 @@ CommentPage.propTypes = {
 }
 
 CommentList.propTypes = {
-  comments: PropTypes.object.isRequired
+  comments: PropTypes.array.isRequired
 }

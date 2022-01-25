@@ -1,5 +1,5 @@
 import React from 'react'
-import { getNewStories, getTopStories } from '../utils/api'
+import { getStories } from '../utils/api'
 import PropTypes from 'prop-types'
 import Loading from './Loading'
 import PostList from './PostList'
@@ -12,26 +12,17 @@ export default class Stories extends React.Component {
   }
 
   async componentDidMount () {
-    if (this.state.mode === 'top') {
-      const items = await getTopStories()
-      this.setState({
-        items: items,
-        loading: false
-      })
-    } else {
-      const items = await getNewStories()
-      this.setState({
-        items: items,
-        loading: false
-      })
-    }
+    const items = await getStories(this.state.mode)
+    this.setState({
+      items: items,
+      loading: false
+    })
   }
 
   render () {
     if (this.state.loading === true) {
       return <Loading text='Loading'/>
     }
-    // const { id, kids, by: userName, url, time, title } = this.state.items
     return (
       <PostList items={this.state.items}/>
     )

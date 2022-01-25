@@ -2,6 +2,7 @@ import React from 'react'
 import sanitizeHtml from 'sanitize-html'
 import PostUser from './PostUser'
 import PropTypes from 'prop-types'
+
 const Comment = ({ commentBody, time, userName }) => (
   <React.Fragment>
     <PostUser time={time} userName={userName}/>

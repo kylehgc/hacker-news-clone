@@ -26,7 +26,6 @@ export default function PostUser ({ userName, time, id, numComments }) {
     <h2>
       by: <NameLink userName = {userName}/> on {getFormattedTime(time)}
       {' '}<Comments numComments={numComments} id={id}/>
-
     </h2>
   )
 }
@@ -36,7 +35,7 @@ NameLink.propTypes = {
 }
 Comments.propTypes = {
   numComments: PropTypes.number,
-  id: PropTypes.number.isRequired
+  id: PropTypes.number
 }
 
 PostUser.propTypes = {
