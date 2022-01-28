@@ -4,18 +4,18 @@ import PropTypes from 'prop-types'
 
 export default function PostList (props) {
   return (
-    <ul>
+    <ul className='post-list'>
       {props.items.map(({
         by: userName,
         id, title,
-        kids: comments,
+        descendants: comments,
         url,
         time
       }) =>
         <li key = {id}>
           <Post id={id}
             title={title}
-            numComments={comments ? comments.length : null}
+            numComments={comments || 0 }
             url={url}
             userName={userName}
             time={time} />
