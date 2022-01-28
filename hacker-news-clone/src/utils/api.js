@@ -5,16 +5,13 @@ const BASEURL = 'https://hacker-news.firebaseio.com/v0/'
 async function getStoryIds (BASEURL, mode) {
   const queryURL = BASEURL + `${mode}stories.json`
   const response = await fetch(queryURL)
+  if (!response.ok) {
+    throw new Error(response.status)
+  }
   const topStoryIds = await response.json()
   return topStoryIds
 }
 
-// async function getNewStoryIds (BASEURL) {
-//   const queryURL = BASEURL + 'newstories.json'
-//   const response = await fetch(queryURL)
-//   const newStoryIds = response.json()
-//   return newStoryIds
-// }
 async function getItemById (BASEURL, id) {
   const queryURL = `${BASEURL}item/${id}.json`
   const response = await fetch(queryURL)
@@ -64,11 +61,12 @@ function getShortItemList (ids, maxLength) {
   }
 }
 async function getItemList (BASEURL, ids) {
-  const items = await Promise.all(
+  const unFilteredItems = await Promise.all(
     ids.map(async (id) => getItemById(BASEURL, id))
   )
 
-  return items.filter(item => item != null) // occasionally the api returns null on an item
+  const NoNullItems = unFilteredItems.filter(item => item != null) // occasionally the api returns null on an item
+  return NoNullItems.filter(item => !item.deleted)
 }
 
 export async function getStories (mode) {

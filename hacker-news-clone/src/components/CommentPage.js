@@ -10,22 +10,35 @@ export default class CommentPage extends React.Component {
   state = {
     loading: true,
     comments: null,
-    story: null
+    story: null,
+    error: null
   }
 
   async componentDidMount () {
     const { id: storyID } = queryString.parse(this.props.location.search)
-    const { story, comments } = await getCommentList(storyID)
-    this.setState({
-      story: story,
-      comments: comments,
-      loading: false
-    })
+    try {
+      const { story, comments } = await getCommentList(storyID)
+      this.setState({
+        story: story,
+        comments: comments,
+        loading: false
+      })
+    } catch (error) {
+      this.setState({
+        error: error.message
+      })
+    }
   }
 
   render () {
-    if (this.state.loading === true) {
-      return <Loading />
+    const { loading, error } = this.state
+    if (error != null) {
+      return (
+        <p> Cant find user! </p>
+      )
+    }
+    if (loading === true) {
+      return <Loading text='Loading' />
     }
     const { story, comments } = this.state
     return (

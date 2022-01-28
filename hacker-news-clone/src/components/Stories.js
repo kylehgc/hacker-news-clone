@@ -8,15 +8,23 @@ export default class Stories extends React.Component {
   state = {
     loading: true,
     items: null,
-    mode: this.props.mode
+    mode: this.props.mode,
+    error: null
   }
 
   async componentDidMount () {
-    const items = await getStories(this.state.mode)
-    this.setState({
-      items: items,
-      loading: false
-    })
+    try {
+      const items = await getStories(this.state.mode)
+
+      this.setState({
+        items: items,
+        loading: false
+      })
+    } catch (error) {
+      this.setState({
+        error: error.message
+      })
+    }
   }
 
   // async UNSAFE_componentWillReceiveProps () {
@@ -24,9 +32,16 @@ export default class Stories extends React.Component {
   // }
 
   render () {
-    if (this.state.loading === true) {
+    const { loading, error } = this.state
+    if (error != null) {
+      return (
+        <p> Cannot load stories </p>
+      )
+    }
+    if (loading === true) {
       return <Loading text='Loading'/>
     }
+
     return (
       <PostList items={this.state.items}/>
     )

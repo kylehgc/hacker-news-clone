@@ -11,21 +11,34 @@ export default class UserProfile extends React.Component {
   state = {
     loading: true,
     user: null,
-    items: null
+    items: null,
+    error: null
   }
 
   async componentDidMount () {
     const { id: user } = queryString.parse(this.props.location.search)
-    const userProfile = await getUserProfile(user)
-    this.setState({
-      loading: false,
-      user: userProfile.user,
-      items: userProfile.submissions
-    })
+    try {
+      const userProfile = await getUserProfile(user)
+      this.setState({
+        loading: false,
+        user: userProfile.user,
+        items: userProfile.submissions
+      })
+    } catch (error) {
+      this.setState({
+        error: error.message
+      })
+    }
   }
 
   render () {
-    if (this.state.loading === true) {
+    const { loading, error } = this.state
+    if (error != null) {
+      return (
+        <p> Cant find user! </p>
+      )
+    }
+    if (loading === true) {
       return <Loading text='Loading' />
     }
     const { karma, created: time, id: userName, about } = this.state.user
