@@ -8,7 +8,8 @@ const styles = {
     left: '0',
     right: '0',
     marginTop: '20px',
-    textAlign: 'center'
+    textAlign: 'center',
+    minHeight: '100%'
   }
 }
 export default class Loading extends React.Component {

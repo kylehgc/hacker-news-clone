@@ -5,6 +5,7 @@ import PostList from './PostList'
 import PropTypes from 'prop-types'
 import { getFormattedTime } from './PostUser'
 import queryString from 'query-string'
+import sanitizeHtml from 'sanitize-html'
 
 export default class UserProfile extends React.Component {
   state = {
@@ -27,10 +28,12 @@ export default class UserProfile extends React.Component {
     if (this.state.loading === true) {
       return <Loading text='Loading' />
     }
-    const { karma, created: time, id: userName } = this.state.user
+    const { karma, created: time, id: userName, about } = this.state.user
     return (
       <div>
         <User karma={karma} time={time} userName={userName} />
+        {about && <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(about) }} />}
+
         <h1>POSTS</h1>
         <PostList items={this.state.items} />
       </div>

@@ -29,15 +29,15 @@ export default class CommentPage extends React.Component {
     }
     const { story, comments } = this.state
     return (
-      <React.Fragment>
+      <div className='test'>
         <Post id={story.id}
           title={story.title}
           numComments={story.descendants ? story.descendants : null}
           url={story.url}
           userName={story.by}
           time={story.time} />
-        <CommentList comments={comments} />
-      </React.Fragment>
+        {comments && <CommentList comments={comments} />}
+      </div>
     )
   }
 }

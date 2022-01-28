@@ -18,6 +18,7 @@ async function getStoryIds (BASEURL, mode) {
 async function getItemById (BASEURL, id) {
   const queryURL = `${BASEURL}item/${id}.json`
   const response = await fetch(queryURL)
+
   const item = await response.json()
   return item
 }
@@ -52,7 +53,6 @@ export async function getCommentList (id) {
   const unFilteredComments = await getItemList(BASEURL, getShortItemList(story.kids, 50))
 
   const comments = unFilteredComments.filter(item => item.text)
-  console.log(comments)
   return { story, comments }
 }
 
@@ -64,10 +64,11 @@ function getShortItemList (ids, maxLength) {
   }
 }
 async function getItemList (BASEURL, ids) {
-  const items = Promise.all(
+  const items = await Promise.all(
     ids.map(async (id) => getItemById(BASEURL, id))
   )
-  return items
+
+  return items.filter(item => item != null) // occasionally the api returns null on an item
 }
 
 export async function getStories (mode) {

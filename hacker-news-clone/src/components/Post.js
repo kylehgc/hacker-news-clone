@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 const Post = ({ id, numComments, title, url, userName, time }) => {
   return (
-    <div className='post'>
+    <div>
       <PostTitle title={title} url={url || `post?id=${id}`}/>
       <PostUser
         userName={userName}
